@@ -58,4 +58,12 @@ public class Book {
         this.publisher = publisher;
         return this;
     }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                '}';
+    }
 }
