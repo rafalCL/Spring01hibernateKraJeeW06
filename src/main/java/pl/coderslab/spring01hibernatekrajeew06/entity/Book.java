@@ -1,6 +1,8 @@
 package pl.coderslab.spring01hibernatekrajeew06.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "books")
@@ -13,6 +15,8 @@ public class Book {
     private String description;
     @ManyToOne
     private Publisher publisher;
+    @ManyToMany
+    private List<Author> authors = new ArrayList<>();
 
     public int getId() {
         return id;
@@ -56,6 +60,15 @@ public class Book {
 
     public Book setPublisher(Publisher publisher) {
         this.publisher = publisher;
+        return this;
+    }
+
+    public List<Author> getAuthors() {
+        return authors;
+    }
+
+    public Book setAuthors(List<Author> authors) {
+        this.authors = authors;
         return this;
     }
 
