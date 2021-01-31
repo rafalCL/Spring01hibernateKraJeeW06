@@ -81,4 +81,29 @@ public class BookController {
 
         return "book/list";
     }
+
+    @GetMapping("/listwp")
+    public String readAllHavingPublisher(Model m) {
+        List<Book> books = this.bookDao.readAllHavingPublisher();
+        m.addAttribute("books", books);
+
+        return "book/list";
+    }
+
+    @GetMapping("/listbypubid")
+    public String listByPubId(@RequestParam int pubId, Model m) {
+        Publisher p = this.publisherDao.readById(pubId);
+        List<Book> books = this.bookDao.readAllHavingPublisherEQ(p);
+        m.addAttribute("books", books);
+
+        return "book/list";
+    }
+
+    @GetMapping("/listbypubname")
+    public String listByPubName(@RequestParam String pubName, Model m) {
+        List<Book> books = this.bookDao.readAllHavingPublisherName(pubName);
+        m.addAttribute("books", books);
+
+        return "book/list";
+    }
 }

@@ -16,12 +16,13 @@
 <body>
 <h2>Book list:</h2>
 <table border="1">
-    <tr><th>id</th><th>title</th><th>rating</th><th>description</th></tr>
+    <tr><th>id</th><th>title</th><th>rating</th><th>Publisher</th><th>description</th></tr>
     <c:forEach items="${books}" var="book">
         <tr>
             <td>${book.id}</td>
             <td>${book.title}</td>
             <td>${book.rating}</td>
+            <td>${book.publisher}</td>
             <td>${book.description}</td>
         </tr>
     </c:forEach>

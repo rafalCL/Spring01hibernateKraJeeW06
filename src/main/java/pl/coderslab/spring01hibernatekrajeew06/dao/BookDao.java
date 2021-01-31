@@ -46,4 +46,29 @@ public class BookDao {
 
         return books;
     }
+
+    public List<Book> readAllHavingPublisher() {
+        final Query query = this.em.createQuery("SELECT b FROM Book b JOIN b.publisher");
+        final List<Book> books = query.getResultList();
+
+        return books;
+    }
+
+    public List<Book> readAllHavingPublisherEQ(Publisher p) {
+        final Query query = this.em.createQuery("SELECT b FROM Book b WHERE b.publisher = :publisher");
+        query.setParameter("publisher", p);
+
+        final List<Book> books = query.getResultList();
+
+        return books;
+    }
+
+    public List<Book> readAllHavingPublisherName(String publisherName) {
+        final Query query = this.em.createQuery("SELECT b FROM Book b WHERE b.publisher.name = :pubName");
+        query.setParameter("pubName", publisherName);
+
+        final List<Book> books = query.getResultList();
+
+        return books;
+    }
 }
