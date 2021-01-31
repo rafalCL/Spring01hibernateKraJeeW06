@@ -36,4 +36,21 @@ public class PersonController {
 
         return "person/details";
     }
+
+    @GetMapping("/addformbind")
+    public String addFormBind(Model m){
+        m.addAttribute("person", new Person());
+
+        return "person/addformbind";
+    }
+
+    @PostMapping("/addformbind")
+    public String addFormBindPost(Person person,
+                                  Model m){
+        this.personDao.create(person);
+
+        m.addAttribute("person", person);
+
+        return "person/details";
+    }
 }
