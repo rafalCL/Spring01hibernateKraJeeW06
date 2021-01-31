@@ -6,11 +6,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import pl.coderslab.spring01hibernatekrajeew06.dao.PersonDao;
 import pl.coderslab.spring01hibernatekrajeew06.entity.Person;
 
 @Controller
 @RequestMapping("/person")
 public class PersonController {
+    private PersonDao personDao;
+
+    public PersonController(PersonDao personDao) {
+        this.personDao = personDao;
+    }
 
     @GetMapping("/addform")
     public String addForm(){
@@ -23,6 +29,9 @@ public class PersonController {
                               @RequestParam String email,
                               Model m){
         Person p = new Person(login, password, email);
+
+        this.personDao.create(p);
+
         m.addAttribute("person", p);
 
         return "person/details";
