@@ -106,4 +106,13 @@ public class BookController {
 
         return "book/list";
     }
+
+    @GetMapping("/listbyauthid")
+    public String listByAuthId(@RequestParam int authId, Model m) {
+        Author a = this.authorDao.readById(authId);
+        List<Book> books = this.bookDao.readAllHavingAuthor(a);
+        m.addAttribute("books", books);
+
+        return "book/list";
+    }
 }

@@ -2,6 +2,7 @@ package pl.coderslab.spring01hibernatekrajeew06.dao;
 
 import org.hibernate.Hibernate;
 import org.springframework.stereotype.Repository;
+import pl.coderslab.spring01hibernatekrajeew06.entity.Author;
 import pl.coderslab.spring01hibernatekrajeew06.entity.Book;
 import pl.coderslab.spring01hibernatekrajeew06.entity.Publisher;
 
@@ -66,6 +67,15 @@ public class BookDao {
     public List<Book> readAllHavingPublisherName(String publisherName) {
         final Query query = this.em.createQuery("SELECT b FROM Book b WHERE b.publisher.name = :pubName");
         query.setParameter("pubName", publisherName);
+
+        final List<Book> books = query.getResultList();
+
+        return books;
+    }
+
+    public List<Book> readAllHavingAuthor(Author toFind) {
+        final Query query = this.em.createQuery("SELECT b FROM Book b WHERE :author MEMBER OF b.authors");
+        query.setParameter("author", toFind);
 
         final List<Book> books = query.getResultList();
 
