@@ -7,7 +7,9 @@ import pl.coderslab.spring01hibernatekrajeew06.entity.Publisher;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Repository
 @Transactional
@@ -28,5 +30,12 @@ public class BookDao {
         Hibernate.initialize(book.getAuthors());
 
         return book;
+    }
+
+    public List<Book> readAll() {
+        final Query query = this.em.createQuery("SELECT b FROM Book b");
+        final List<Book> books = query.getResultList();
+
+        return books;
     }
 }

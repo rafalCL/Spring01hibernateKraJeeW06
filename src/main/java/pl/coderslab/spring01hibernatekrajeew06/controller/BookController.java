@@ -2,6 +2,7 @@ package pl.coderslab.spring01hibernatekrajeew06.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pl.coderslab.spring01hibernatekrajeew06.dao.AuthorDao;
 import pl.coderslab.spring01hibernatekrajeew06.dao.BookDao;
@@ -9,6 +10,8 @@ import pl.coderslab.spring01hibernatekrajeew06.dao.PublisherDao;
 import pl.coderslab.spring01hibernatekrajeew06.entity.Author;
 import pl.coderslab.spring01hibernatekrajeew06.entity.Book;
 import pl.coderslab.spring01hibernatekrajeew06.entity.Publisher;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/book")
@@ -61,5 +64,13 @@ public class BookController {
         Book book = this.bookDao.readByIdWithAuthors(bookId);
 
         return "Zapisano: id=" + book.getId() + ", title=" + book.getTitle() + ", authors="+book.getAuthors().toString();
+    }
+
+    @GetMapping("/all")
+    public String readAll(Model m) {
+        List<Book> books = this.bookDao.readAll();
+        m.addAttribute("books", books);
+
+        return "book/all";
     }
 }
