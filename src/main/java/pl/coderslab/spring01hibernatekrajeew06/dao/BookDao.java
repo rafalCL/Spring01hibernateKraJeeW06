@@ -38,4 +38,12 @@ public class BookDao {
 
         return books;
     }
+
+    public List<Book> readByRatingGTE(int rating) {
+        final Query query = this.em.createQuery("SELECT b FROM Book b WHERE b.rating >= :toCompare");
+        query.setParameter("toCompare", rating);
+        final List<Book> books = query.getResultList();
+
+        return books;
+    }
 }

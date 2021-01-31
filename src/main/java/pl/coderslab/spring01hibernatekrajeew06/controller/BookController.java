@@ -66,11 +66,19 @@ public class BookController {
         return "Zapisano: id=" + book.getId() + ", title=" + book.getTitle() + ", authors="+book.getAuthors().toString();
     }
 
-    @GetMapping("/all")
+    @GetMapping("/list")
     public String readAll(Model m) {
         List<Book> books = this.bookDao.readAll();
         m.addAttribute("books", books);
 
-        return "book/all";
+        return "book/list";
+    }
+
+    @GetMapping("/listrating")
+    public String readByRatingGTE(@RequestParam int minRating, Model m) {
+        List<Book> books = this.bookDao.readByRatingGTE(minRating);
+        m.addAttribute("books", books);
+
+        return "book/list";
     }
 }
