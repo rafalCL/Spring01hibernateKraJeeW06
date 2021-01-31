@@ -6,8 +6,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import pl.coderslab.spring01hibernatekrajeew06.dao.AuthorDao;
 import pl.coderslab.spring01hibernatekrajeew06.dao.BookDao;
 import pl.coderslab.spring01hibernatekrajeew06.dao.PublisherDao;
+import pl.coderslab.spring01hibernatekrajeew06.entity.Author;
 import pl.coderslab.spring01hibernatekrajeew06.entity.Book;
 import pl.coderslab.spring01hibernatekrajeew06.entity.Publisher;
 
@@ -25,10 +27,12 @@ import java.util.List;
 public class BookFormController {
     private BookDao bookDao;
     private PublisherDao publisherDao;
+    private AuthorDao authorDao;
 
-    public BookFormController(BookDao bookDao, PublisherDao publisherDao) {
+    public BookFormController(BookDao bookDao, PublisherDao publisherDao, AuthorDao authorDao) {
         this.bookDao = bookDao;
         this.publisherDao = publisherDao;
+        this.authorDao = authorDao;
     }
 
     @GetMapping("/list")
@@ -58,5 +62,10 @@ public class BookFormController {
     @ModelAttribute("books")
     public List<Book> books(){
         return this.bookDao.readAll();
+    }
+
+    @ModelAttribute("authors")
+    public List<Author> authors(){
+        return this.authorDao.readAll();
     }
 }

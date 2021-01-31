@@ -17,11 +17,6 @@
 <body>
 <h2>Add book form:</h2>
     <form:form method="post" modelAttribute="book">
-
-
-<%--@ManyToMany--%>
-<%--private List<Author> authors = new ArrayList<>();--%>
-
         <div>
             <label for="title">title</label>
             <form:input type="text" id="title" path="title" />
@@ -37,6 +32,10 @@
         <div>
             <label for="publisher">publisher</label>
             <form:select path="publisher.id" id="publisher" items="${publishers}" itemValue="id" itemLabel="name" />
+        </div>
+        <div>
+            <label for="authors">authors</label>
+            <form:select path="authors" id="authors" items="${authors}" itemValue="id" itemLabel="fullName" multiple="true"/>
         </div>
 
         <div>
