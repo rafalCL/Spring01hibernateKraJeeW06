@@ -13,6 +13,7 @@ import pl.coderslab.spring01hibernatekrajeew06.dao.PublisherDao;
 import pl.coderslab.spring01hibernatekrajeew06.entity.Author;
 import pl.coderslab.spring01hibernatekrajeew06.entity.Book;
 import pl.coderslab.spring01hibernatekrajeew06.entity.Publisher;
+import pl.coderslab.spring01hibernatekrajeew06.repository.BookRepository;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -27,12 +28,12 @@ import java.util.List;
 @Controller
 @RequestMapping("/bookform")
 public class BookFormController {
-    private BookDao bookDao;
+    private BookRepository bookRepository;
     private PublisherDao publisherDao;
     private AuthorDao authorDao;
 
-    public BookFormController(BookDao bookDao, PublisherDao publisherDao, AuthorDao authorDao) {
-        this.bookDao = bookDao;
+    public BookFormController(BookRepository bookRepository, PublisherDao publisherDao, AuthorDao authorDao) {
+        this.bookRepository = bookRepository;
         this.publisherDao = publisherDao;
         this.authorDao = authorDao;
     }
@@ -55,7 +56,7 @@ public class BookFormController {
             return "book/book-form";
         }
 
-        this.bookDao.create(book);
+        this.bookRepository.save(book);
 
         return "redirect:list";
     }
@@ -67,7 +68,7 @@ public class BookFormController {
 
     @ModelAttribute("books")
     public List<Book> books(){
-        return this.bookDao.readAll();
+        return this.bookRepository.findAll();
     }
 
     @ModelAttribute("authors")
