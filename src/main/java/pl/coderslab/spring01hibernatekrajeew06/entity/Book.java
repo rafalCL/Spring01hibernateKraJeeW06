@@ -28,7 +28,7 @@ public class Book {
     private String title;
     @Range(min = 1, max = 10)
     private int rating;
-    @Size(max = 30)
+    @Size(max = 600)
     private String description;
     @NotNull(message = "This can't be NULL. Says annotation message")
     @ManyToOne

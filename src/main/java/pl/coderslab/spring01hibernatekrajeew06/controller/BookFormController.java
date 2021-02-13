@@ -2,6 +2,7 @@ package pl.coderslab.spring01hibernatekrajeew06.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,6 +14,7 @@ import pl.coderslab.spring01hibernatekrajeew06.entity.Author;
 import pl.coderslab.spring01hibernatekrajeew06.entity.Book;
 import pl.coderslab.spring01hibernatekrajeew06.entity.Publisher;
 
+import javax.validation.Valid;
 import java.util.List;
 
 //W projekcie Spring01hibernate utwórz kontroler BookFormController, umieścimy w nim akcje odpowiedzialne za operacje na obiektach typu Book z wykorzystaniem formularzy.
@@ -48,7 +50,11 @@ public class BookFormController {
     }
 
     @PostMapping("/add")
-    public String addPost(Book book){
+    public String addPost(@Valid Book book, BindingResult violations){
+        if(violations.hasErrors()){
+            return "book/book-form";
+        }
+
         this.bookDao.create(book);
 
         return "redirect:list";
