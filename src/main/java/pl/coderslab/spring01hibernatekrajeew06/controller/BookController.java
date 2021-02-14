@@ -178,4 +178,23 @@ public class BookController {
 
         return "book/list";
     }
+
+    @GetMapping("/listcustombytitle")
+    public String listCustomByTitle(@RequestParam String title, Model m) {
+        List<Book> books = this.bookRepository.readCustomByTitle(title);
+        m.addAttribute("books", books);
+
+        return "book/list";
+    }
+
+    @GetMapping("/listcustombycategory")
+    public String listCustomByCategory(@RequestParam int catId, Model m) {
+        Category category = this.categoryRepository.getOne(catId);
+        List<Book> books = this.bookRepository.readCustomByCategory(category);
+        m.addAttribute("books", books);
+
+        return "book/list";
+    }
+
+
 }
