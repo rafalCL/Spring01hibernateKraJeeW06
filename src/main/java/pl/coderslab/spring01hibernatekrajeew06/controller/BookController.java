@@ -196,5 +196,10 @@ public class BookController {
         return "book/list";
     }
 
+    @GetMapping("/kilerjob")
+    public String kilerJob(@RequestParam String firstLetter, Model m) {
+        this.bookRepository.misterKilerDoYourJob(firstLetter);
 
+        return "redirect:list";
+    }
 }
